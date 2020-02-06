@@ -5,18 +5,17 @@ Created on Wed Jan 29 13:00:17 2020
 @author: lucas
 """
 
-from urllib.request import urlopen
 import json
 import plotly.express as px
 import pandas as pd
 import numpy as np
 
 
-data1 = pd.read_csv('../../../Data/alabamaFlowData.csv',',',dtype = {'fipsA': 'str', 'fipsB': 'str'})
+data1 = pd.read_csv('../../../Data/californiaFlowData.csv',',',dtype = {'fipsA': 'str', 'fipsB': 'str'})
 data2 = pd.read_csv('../../../Data/countyPop2014_v3.csv',',',dtype = {'county': 'str'})
 
 # select data syntax data1.loc[data1['county'] == 36061]
-countyCode = "01073"
+countyCode = "06001"
 countyFlow = (data1.iloc[np.where(data1.fipsA.values == countyCode)])
 
 dfTest = pd.DataFrame()
@@ -36,6 +35,7 @@ dfExtend['fips'] = newCnts
 dfExtend['Migrants'] = np.zeros(len(newCnts))
 
 dfTest = dfTest.append(dfExtend)
+
 
 
 with open('../../../Data/geojson-counties-fips.json') as json_file:
